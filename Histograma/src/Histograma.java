@@ -37,7 +37,7 @@ public class Histograma {
         int [] ha = new int[256];
         //BufferedImage lara = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
 
-        for (int i = 0; i < 256; i++) {
+        for (int i = 0; i < histogram.length; i++) {
 
             if (i == 0 && histogram[i] != 0) {
                 min = histogram[i];
@@ -47,7 +47,7 @@ public class Histograma {
             }
         }
 
-        for (int i = 0; i < 256; i++)
+        for (int i = 0; i < histogram.length; i++)
         {
             if (i == 0)
             {
@@ -60,7 +60,7 @@ public class Histograma {
             }
         }
 
-        for (int i = 0; i < 256; i++)
+        for (int i = 0; i < histogram.length; i++)
         {
             histogram[i] = round((ha[i] - min) / (pixels - min) * 255);
         }
