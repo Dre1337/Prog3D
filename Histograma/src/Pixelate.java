@@ -174,20 +174,20 @@ public class Pixelate {
     }
 
     public void run() throws Exception {
-        //Exercicio do lerp. Faz lerp de 0.1 ate 0.9
-        BufferedImage img1 = ImageIO.read(new File("C:/Users/lukas/Pictures/img/cor/mario.jpg"));
-        BufferedImage img2 = ImageIO.read(new File("C:/Users/lukas/Pictures/img/cor/sonic.jpg"));
+       /* //Exercicio do lerp. Faz lerp de 0.1 ate 0.9
+        BufferedImage img1 = ImageIO.read(new File("C:/Users/Lukas/Documents/Prog3D/img/cor/mario.jpg"));
+        BufferedImage img2 = ImageIO.read(new File("C:/Users/Lukas/Documents/Prog3D/img/cor/sonic.jpg"));
         for (int i = 0; i < 10; i++) {
             float amount = i / 10f;
             BufferedImage r = lerp(img1, img2, amount);
-            ImageIO.write(r, "png", new File("C:/Users/lukas/Pictures/img/cor/lerp" + i + ".png"));
+            ImageIO.write(r, "png", new File("C:/Users/Lukas/Documents/Prog3D/img/cor/lerp" + i + ".png"));
         }
 
         //Multiply
-        BufferedImage metroid = ImageIO.read(new File("C:/Users/lukas/Pictures/img/cor/metroid1.jpg"));
+        BufferedImage metroid = ImageIO.read(new File("C:/Users/Lukas/Documents/Prog3D/img/cor/metroid1.jpg"));
         Vector3f sunLight = new Vector3f(1.0f, 1.0f, 0.6f);
         BufferedImage r = multiply(metroid, sunLight);
-        ImageIO.write(r, "png", new File("C:/Users/lukas/Pictures/img/cor/multiply.png"));
+        ImageIO.write(r, "png", new File("C:/Users/Lukas/Documents/Prog3D/img/multiply.png"));
 
         //*** Convolve ***
         float[][] prewitt = {
@@ -196,7 +196,7 @@ public class Pixelate {
                 {-1.0f, 0.0f, 1.0f}
         };
         r = convolve(metroid, prewitt);
-        ImageIO.write(r, "png", new File("C:/Users/lukas/Pictures/img/cor/prewitt.png"));
+        ImageIO.write(r, "png", new File("C:/Users/Lukas/Documents/Prog3D/img/cor/prewitt.png"));
 
         //Contraste
         float[][] contraste = {
@@ -205,7 +205,7 @@ public class Pixelate {
                 { 0.0f, -1.0f,  0.0f}
         };
         r = convolve(metroid, contraste);
-        ImageIO.write(r, "png", new File("C:/Users/lukas/Pictures/img/cor/contraste.png"));
+        ImageIO.write(r, "png", new File("C:/Users/Lukas/Documents/Prog3D/img/cor/contraste.png"));
 
         float umNono = 1.0f / 9.0f;
         float[][] blur = {
@@ -215,32 +215,32 @@ public class Pixelate {
         };
 
         r = convolve(metroid, blur);
-        ImageIO.write(r, "png", new File("C:/Users/lukas/Pictures/img/cor/blur.png"));
+        ImageIO.write(r, "png", new File("C:/Users/Lukas/Documents/Prog3D/img/cor/blur.png"));
 
         // Brilho em HSV
-        BufferedImage lara = ImageIO.read(new File ("C:/Users/lukas/Pictures/img/cor/lara.png"));
+        BufferedImage lara = ImageIO.read(new File ("C:/Users/Lukas/Documents/Prog3D/img/cor/lara.png"));
         BufferedImage lara2 = BrightnessHSV(lara, 50.0f);
-        ImageIO.write(lara2, "png", new File("C:/Users/lukas/Pictures/img/cor/lara_brilho_HSV.png"));
+        ImageIO.write(lara2, "png", new File("C:/Users/Lukas/Documents/Prog3D/img/lara_brilho_HSV.png"));
 
         //Satura��o em HSV
-        BufferedImage puppy = ImageIO.read(new File ("C:/Users/lukas/Pictures/img/cor/puppy.png"));
+        BufferedImage puppy = ImageIO.read(new File ("C:/Users/Lukas/Documents/Prog3D/img/cor/puppy.png"));
         BufferedImage puppy2 = SaturationHSV(puppy, 0.5f);
-        ImageIO.write(puppy2, "png", new File("C:/Users/lukas/Pictures/img/cor/puppy_satura��o_HSV.png"));
+        ImageIO.write(puppy2, "png", new File("C:/Users/Lukas/Documents/Prog3D/img/puppy_satura��o_HSV.png"));
 
         //Matiz em HSV
-        BufferedImage metroid1 = ImageIO.read(new File ("C:/Users/lukas/Pictures/img/cor/metroid1.jpg"));
+        BufferedImage metroid1 = ImageIO.read(new File ("C:/Users/Lukas/Documents/Prog3D/img/cor/metroid1.jpg"));
         BufferedImage metroid2 = MatizHSV(metroid1, 0.3f);
-        ImageIO.write(metroid2, "jpg", new File("C:/Users/lukas/Pictures/img/cor/metroid1_8_matiz_HSV.jpg"));
+        ImageIO.write(metroid2, "jpg", new File("C:/Users/Lukas/Documents/Prog3D/img/metroid1_8_matiz_HSV.jpg"));
 
         //Eros�o
-        BufferedImage universidade = ImageIO.read(new File("C:/Users/lukas/Pictures/img/gray/university.png"));
+        BufferedImage universidade = ImageIO.read(new File("C:/Users/Lukas/Documents/Prog3D/img/gray/university.png"));
         float[][] erosao = {
                 { 0.0f, 0.0f,   0.0f},
                 {1.0f,  1.0f, 1.0f},
                 { 0.0f, 0.0f,  0.0f}
         };
         r = convolve(universidade, erosao);
-        ImageIO.write(r, "png", new File("C:/Users/lukas/Pictures/img/gray/erosao.png"));
+        ImageIO.write(r, "png", new File("C:/Users/Lukas/Documents/Prog3D/img/gray/erosao.png"));
 
         //Dilata��o
         float[][] dilatacao = {
@@ -249,9 +249,29 @@ public class Pixelate {
                 {0.0f, 1.0f, 0.0f}
         };
         r = convolve(universidade, dilatacao);
-        ImageIO.write(r, "png", new File("C:/Users/lukas/Pictures/img/gray/dilatacao.png"));
+        ImageIO.write(r, "png", new File("C:/Users/Lukas/Documents/Prog3D/img/gray/dilatacao.png"));
+*/
 
-        System.out.println("Pronto!");
+        //Eros�o
+        BufferedImage img = ImageIO.read(new File("C:/Users/Lukas/Documents/Prog3D/img/cor/puppy.png"));
+
+        float[][] emboss = {
+                { -2.0f, -1.0f,  0.0f},
+                { -1.0f, 1.0f,  1.0f},
+                { 0.0f, 1.0f,  2.0f}
+        };
+        BufferedImage r = convolve(img, emboss);
+        ImageIO.write(r, "png", new File("C:/Users/Lukas/Documents/Prog3D/img/cor/puppy2.png"));
+
+        //Contraste
+        float[][] contraste = {
+                { 0.0f, -1.0f,   0.0f},
+                {-1.0f,  5.0f, -1.0f},
+                { 0.0f, -1.0f,  0.0f}
+        };
+        r = convolve(img, contraste);
+        ImageIO.write(r, "png", new File("C:/Users/Lukas/Documents/Prog3D/img/cor/puppy3.png"));
+
     }
 
 

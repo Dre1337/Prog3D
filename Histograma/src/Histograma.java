@@ -4,16 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import static java.lang.StrictMath.round;
+import static java.lang.Math.round;
 
 public class Histograma {
-
-    public  int saturate(int value)
-    {
-        return value > 256 ? 256 : (value < 0 ? 0 : value);
-
-    }
-
 
     int    []histogram(BufferedImage img){
 
@@ -23,46 +16,38 @@ public class Histograma {
             for(int x = 0; x < img.getWidth(); x++)
             {
                 Color r = new Color(img.getRGB(x,y));
-                int tom = r.getRed();
+                int tom = (r.getRed() + r.getBlue() + r.getGreen()) / 3;
                 hist[tom] ++;
             }
         }
-
         return hist;
     }
-    BufferedImage acumHistogram(int[] histogram, BufferedImage img) {
+    BufferedImage equalHistogram(int[] histogram, BufferedImage img) {
 
-        int min = 0, pixels = img.getHeight() * img.getWidth();
-        int nt;
+        int min = 0;
+        float pixels = img.getHeight() * img.getWidth();
         int [] ha = new int[256];
         //BufferedImage lara = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
 
-        for (int i = 0; i < histogram.length; i++) {
 
-            if (i == 0 && histogram[i] != 0) {
+        for (int i = 0; i < 256; i++)
+        {
+            if (histogram[i] > 0) {
                 min = histogram[i];
                 break;
-            } else if (histogram[i] <= min && histogram[i] != 0) {
-                min = histogram[i];
             }
         }
 
-        for (int i = 0; i < histogram.length; i++)
+        ha[0] = histogram[0];
+
+        for (int i= 1; i < 256; i++)
         {
-            if (i == 0)
-            {
-                ha[i] = histogram[i];
-                min = ha[i];
-            }
-            else
-            {
-                ha[i] = ha[i - 1] + histogram[i];
-            }
+            ha[i] = ha[i - 1] + histogram[i];
         }
 
-        for (int i = 0; i < histogram.length; i++)
+        for (int i = 0; i < 256; i++)
         {
-            histogram[i] = round((ha[i] - min) / (pixels - min) * 255);
+            histogram[i] = round(((ha[i] - min) / (pixels - min)) * 255);
         }
 
         for(int y = 0; y < img.getHeight(); y++)
@@ -70,23 +55,20 @@ public class Histograma {
             for(int x = 0; x < img.getWidth(); x++)
             {
                 Color r = new Color(img.getRGB(x,y));
-                int tom = r.getRed();
-                img.setRGB(x, y, histogram[tom]);
-
+                int media = (r.getRed() + r.getBlue() + r.getGreen()) / 3;
+                int tom = histogram[media];
+                img.setRGB(x, y, new Color(tom, tom, tom).getRGB());
             }
         }
-
         return img;
     }
 
     public void Run() throws IOException
     {
-        BufferedImage img = ImageIO.read(new File("C:/Users/Lukas/Documents/Prog3D/img/gray/university.png"));
+        BufferedImage img = ImageIO.read(new File("C:/Users/Lukas/Documents/Prog3D/img/gray/crowd.png"));
         int[] h = histogram(img);
-        BufferedImage lara = acumHistogram(h, img);
-        ImageIO.write(lara, "png", new File("C:/Users/Lukas/Documents/Prog3D/img/gray/university2.png"));
-
-
+        BufferedImage lara = equalHistogram(h, img);
+        ImageIO.write(lara, "png", new File("C:/Users/Lukas/Documents/Prog3D/img/gray/crowd2.png"));
     }
 
     public static void main(String[] args) throws Exception {
