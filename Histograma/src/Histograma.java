@@ -27,8 +27,6 @@ public class Histograma {
         int min = 0;
         float pixels = img.getHeight() * img.getWidth();
         int [] ha = new int[256];
-        //BufferedImage lara = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
-
 
         for (int i = 0; i < 256; i++)
         {

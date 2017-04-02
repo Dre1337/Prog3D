@@ -46,7 +46,7 @@ public class FT {
         return closest;
     }
 
-    public BufferedImage converter(BufferedImage in, int[] pallete) {
+    public BufferedImage convert(BufferedImage in, int[] pallete) {
 
         BufferedImage out = new BufferedImage(in.getWidth(), in.getHeight(), BufferedImage.TYPE_INT_RGB);
 
@@ -63,7 +63,7 @@ public class FT {
 
     public void run() throws IOException {
         BufferedImage in = ImageIO.read(new File("C:/Users/Lukas/Documents/Prog3D/img/cor/puppy.png"));
-        BufferedImage  out = converter(in, pallete64);
+        BufferedImage  out = convert(in, pallete64);
         ImageIO.write(out, "png", new File("C:/Users/Lukas/Documents/Prog3D/img/cor/puppy64.png"));
     }
     public static void main(String[] args) throws IOException {
